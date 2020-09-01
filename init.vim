@@ -175,6 +175,7 @@ let g:coc_global_extensions = [
             \]
 
 " indentLine
+let g:indentLine_enabled = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:indentLine_setColors = 0
 let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
