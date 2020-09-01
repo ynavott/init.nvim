@@ -224,7 +224,7 @@ let g:startify_custom_header = [
  \]
 
 " rainbow brackets
-let g:rainbow_active = 1
+"let g:rainbow_active = 1
 
 " semshi settings
 let g:semshi#error_sign	= v:false                       " let ms python lsp handle this
