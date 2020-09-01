@@ -16,7 +16,8 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 Plug 'vim-airline/vim-airline'                          " airline status bar
 Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
 Plug 'luochen1990/rainbow'                              " rainbow parenthesis
-Plug 'hzchirs/vim-material'                             " material color themes
+"Plug 'hzchirs/vim-material'                             " material color themes
+Plug 'arcticicestudio/nord-vim'                         " nord color scheme
 Plug 'gregsexton/MatchTag'                              " highlight matching html tags
 
 "}}}
@@ -92,12 +93,12 @@ set shortmess+=c
 set signcolumn=yes
 
 " Python VirtualEnv
-let g:python_host_prog =  expand('/usr/bin/python')
-let g:python3_host_prog = expand('/usr/bin/python3')
+"let g:python_host_prog =  expand('/home/yoav/.virtualenvs/pynvim3/.venv/bin/python')
+let g:python3_host_prog = expand('/home/yoav/.virtualenvs/pynvim3/.venv/bin/python')
 
 " Themeing
-let g:material_style = 'oceanic'
-colorscheme vim-material
+"let g:material_style = 'oceanic'
+colorscheme nord
 highlight Pmenu guibg='#00010a' guifg=white              " popup menu colors
 highlight Comment gui=italic cterm=italic               " bold comments
 highlight Normal gui=none
@@ -135,7 +136,7 @@ let loaded_netrw = 0                                    " diable netew
 let g:omni_sql_no_default_maps = 1                      " disable sql omni completion
 
 " Airline
-let g:airline_theme='material'
+"let g:airline_theme='material'
 let g:airline_powerline_fonts = 0
 let g:airline#themes#clean#palette = 1
 call airline#parts#define_raw('linenr', '%l')
