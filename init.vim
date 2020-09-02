@@ -425,7 +425,7 @@ nmap <leader>gd :Gdiffsplit<CR>
 nmap <leader>gb :Gblame<CR>
 
 " turn terminal to normal mode with escape
-tnoremap <Esc> <C-\><C-n>
+"tnoremap <Esc> <C-\><C-n>
 " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " open terminal on ctrl+n
@@ -434,5 +434,20 @@ function! OpenTerminal()
   resize 10
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>
+
+  " fix exit code 0 issue
+  augroup terminal_settings
+    autocmd!
+
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+
+    " Ignore various filetypes as those will close terminal automatically
+    " Ignore fzf, ranger, coc
+    autocmd TermClose term://*
+          \ if (expand('<afile>') !~ "fzf") && (expand('<afile>') !~ "ranger") && (expand('<afile>') !~ "coc") |
+          \   call nvim_input('<CR>')  |
+          \ endif
+  augroup END
 
 "}}}
