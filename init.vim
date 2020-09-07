@@ -39,6 +39,8 @@ Plug 'psliwka/vim-smoothie'                             " some very smooth ass s
 Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
 Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
 Plug 'machakann/vim-sandwich'                           " make sandwiches
+"Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 call plug#end()
 
 "}}}
@@ -99,7 +101,7 @@ let g:python3_host_prog = expand('/home/yoav/.virtualenvs/pynvim3/.venv/bin/pyth
 " Themeing
 "let g:material_style = 'oceanic'
 colorscheme nord
-highlight Pmenu guibg='#00010a' guifg=white              " popup menu colors
+highlight Pmenu guibg='#00010a' guifg=white             " popup menu colors
 highlight Comment gui=italic cterm=italic               " bold comments
 highlight Normal gui=none
 highlight NonText guibg=none
@@ -109,6 +111,7 @@ autocmd ColorScheme * highlight VertSplit cterm=NONE    " split color
 hi NonText guifg=bg                                     " mask ~ on empty lines
 hi clear CursorLineNr                                   " use the theme color for relative number
 hi CursorLineNr gui=bold                                " make relative number bold
+hi SpellBad guifg=#ff7480 cterm=bold,undercurl          " misspelled words
 
 " colors for git (especially the gutter)
 hi DiffAdd  guibg=#0f111a guifg=#43a047
@@ -122,6 +125,8 @@ hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 if exists('$TMUX')
     let &t_SI .= "\ePtmux;\e\e[=1c\e\\"
     let &t_EI .= "\ePtmux;\e\e[=2c\e\\"
+    let &t_Cs = "\e[4:3m"
+    let &t_Ce = "\e[4:0m"
  else
     let &t_SI .= "\e[=1c"
     let &t_EI .= "\e[=2c"
@@ -134,6 +139,10 @@ if exists('$TMUX')
 "" built in plugins
 let loaded_netrw = 0                                    " diable netew
 let g:omni_sql_no_default_maps = 1                      " disable sql omni completion
+let g:loaded_python_provider = 0
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+let g:python3_host_prog = expand('/usr/bin/python3')
 
 " Airline
 "let g:airline_theme='material'
@@ -176,7 +185,7 @@ let g:coc_global_extensions = [
 
 " indentLine
 let g:indentLine_enabled = 0
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_char_list = ['▏']
 let g:indentLine_setColors = 0
 let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
 let g:indentLine_fileTypeExclude = ['startify']
@@ -226,6 +235,9 @@ let g:startify_custom_header = [
 
 " rainbow brackets
 "let g:rainbow_active = 1
+
+" tmux navigator
+let g:tmux_navigator_no_mappings = 1
 
 " semshi settings
 let g:semshi#error_sign	= v:false                       " let ms python lsp handle this

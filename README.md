@@ -9,7 +9,7 @@
   - [Supported Languages](#supported-languages)
 - [Requirements](#requirements)
 - [Setup](#setup)
-  - [Environment](#Environment)
+  - [Environment](#environment)
   - [Tools](#tools)
 - [Installation](#installation)
 - [Plugins](#plugins)
@@ -36,10 +36,11 @@ distro avoids, KISS!
 - Super fast startup (less than 40ms!)
 - Lazy loading plugins
 - Highly customizable
-- Beautiful Material ocean color scheme
-- Vscode like auto completion, multi cursor
+- Beautiful [Material ocean](https://github.com/material-ocean/Material-Ocean) color scheme
+- Various IDE features via [coc.nvim](https://github.com/neoclide/coc.nvim)
 - Smooth Scrolling (its really smooth!)
-- floating window + borders + file previews on fzf(see [demos](#demos))
+- Fully integrated with fzf (see [demos](#demos))
+- Live Markdown preview
 - Simple, Intuitive shortcuts
 
 ### Supported Languages
@@ -61,11 +62,8 @@ To check if your current environment is correctly set up run `:CheckHealth`.
 
 ### Environment
 
-- python
-  - python3 `pip3 install --user pynvim`
-  - python2 `pip2 install --user pynvim`
-- ruby `gem install neovim`
-- nodeJS `yarn install -g neovim`
+- python3: `pip3 install --user pynvim`
+- javascript: `yarn install -g neovim`
 
 ### Tools
 
@@ -93,26 +91,28 @@ the current buffer is not loaded) for example opening a python file means all
 other non python related plugins are not loaded.
 Coc extensions are lazy loaded as well, they work the same way as vim-plug plugins.
 
-| Plugin                                                       | Functionality                  |
-| ------------------------------------------------------------ | ------------------------------ |
-| [vim-airline](https://github.com/vim-airline/vim-airline)    | airline status line            |
-| [devicons](https://github.com/ryanoasis/vim-devicons)        | icons everywhere               |
-| [rainbow](https://github.com/luochen1990/rainbow)            | rainbow parenthesis            |
-| [vim-material](https://github.com/hzchirs/vim-material)      | material themes                |
-| [coc.nvim](https://github.com/neoclide/coc.nvim)             | async completion and more      |
-| [fzf.vim](https://github.com/junegunn/fzf.vim)               | fuzzy finder vim integration   |
-| [ultisnips](https://github.com/SirVer/ultisnips)             | snippets engine                |
-| [vim-snippets](https://github.com/honza/vim-snippets)        | snippets for many languages    |
-| [indentLine](https://github.com/Yggdroot/indentLine)         | auto indent lines              |
-| [vim-liquid](https://github.com/tpope/vim-liquid)            | liquid language support        |
-| [vim-commentary](https://github.com/tpope/vim-commentary)    | better comments everywhere     |
-| [vim-startify](https://github.com/mhinz/vim-startify)        | cool startup thingy            |
-| [vim-fugitive](https://github.com/tpope/vim-fugitive)        | best git integration around    |
-| [vim-sandwich](https://github.com/machakann/vim-sandwich)    | surround stuff with stuff      |
-| [vim-smoothie](https://github.com/psliwka/vim-smoothie)      | super smooth scrolling         |
-| [tmux-complete](https://github.com/wellle/tmux-complete.vim) | tmux panes completion          |
-| [vim-eunuch](https://github.com/tpope/vim-eunuch)            | some common Linux commands     |
-| [semshi](https://github.com/numirias/semshi)                 | better highlighting for python |
+| Plugin                                                              | Functionality                                |
+| ------------------------------------------------------------------- | -------------------------------------------- |
+| [vim-airline](https://github.com/vim-airline/vim-airline)           | airline status line                          |
+| [devicons](https://github.com/ryanoasis/vim-devicons)               | icons everywhere                             |
+| [rainbow](https://github.com/luochen1990/rainbow)                   | rainbow parenthesis                          |
+| [vim-material](https://github.com/hzchirs/vim-material)             | material themes                              |
+| [coc.nvim](https://github.com/neoclide/coc.nvim)                    | async completion and more                    |
+| [fzf.vim](https://github.com/junegunn/fzf.vim)                      | fuzzy finder vim integration                 |
+| [ultisnips](https://github.com/SirVer/ultisnips)                    | snippets engine                              |
+| [vim-snippets](https://github.com/honza/vim-snippets)               | snippets for many languages                  |
+| [indentLine](https://github.com/Yggdroot/indentLine)                | auto indent lines                            |
+| [vim-liquid](https://github.com/tpope/vim-liquid)                   | liquid language support                      |
+| [vim-commentary](https://github.com/tpope/vim-commentary)           | better comments everywhere                   |
+| [vim-startify](https://github.com/mhinz/vim-startify)               | cool startup thingy                          |
+| [vim-fugitive](https://github.com/tpope/vim-fugitive)               | best git integration around                  |
+| [vim-sandwich](https://github.com/machakann/vim-sandwich)           | surround stuff with stuff                    |
+| [vim-smoothie](https://github.com/psliwka/vim-smoothie)             | super smooth scrolling                       |
+| [tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) | seamless movement between Vim and tmux panes |
+| [tmux-complete](https://github.com/wellle/tmux-complete.vim)        | tmux panes completion                        |
+| [vim-eunuch](https://github.com/tpope/vim-eunuch)                   | some common Linux commands                   |
+| [semshi](https://github.com/numirias/semshi)                        | better highlighting for python               |
+| [markdown-preview](https://github.com/iamcco/markdown-preview.nvim) | live markdown preview                        |
 
 ## Keyboard shortcuts
 
@@ -212,13 +212,13 @@ highly opinionated).
   plugin settings
 
 - **Disabling CoC Plugins:** comment out the plugin from `coc_global_extensions` variable and
-  then uninstall it via `:CocUninstall` plugin name
+  uninstall it via `:CocUninstall` plugin name
 
 - **Installing CoC plugins:** open `:CocList` and search for marketplace, you can find all
   available plugins here
 
 - **Adding Bookmarks:** to add bookmarks to the start page, find `g:startify_bookmarks` in
-  `init.nvim` and add the a new bookmark just like the already present ones, the dictionary
+  `init.nvim` and add the new bookmark just like the already present ones, the dictionary
   key is the shortcut you will use to quickly jump to that folder from the start page and
   the value is the path to targeted folder
 
