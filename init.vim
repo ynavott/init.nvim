@@ -142,7 +142,6 @@ let g:omni_sql_no_default_maps = 1                      " disable sql omni compl
 let g:loaded_python_provider = 0
 let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
-let g:python3_host_prog = expand('/usr/bin/python3')
 
 " Airline
 "let g:airline_theme='material'
@@ -206,7 +205,7 @@ let g:startify_lists = [
 " bookmark examples
 let  g:startify_bookmarks =  [
     \ {'v': '~/.config/nvim'},
-    \ {'d': '~/.dotfiles' }
+    \ {'~': '~/' }
     \ ]
 
 " custom commands
