@@ -166,6 +166,7 @@ let g:coc_snippet_prev = '<S-Tab>'
 " list of the extensions to make sure are always installed
 let g:coc_global_extensions = [
             \'coc-yank',
+            \'coc-actions',
             \'coc-pairs',
             \'coc-json',
             \'coc-css',
@@ -272,13 +273,25 @@ autocmd BufEnter * if index(spellable, &ft) < 0 | set nospell | else | set spell
 " coc completion popup
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" autostart startify
-augroup startifier
+" startify if no passed argument or all buffers are closed
+augroup noargs
     " startify when there is no open buffer left
     autocmd BufDelete * if empty(filter(tabpagebuflist(), '!buflisted(v:val)')) | Startify | endif
 
-    " open startify on start
+    " open startify on start if no argument was passed
     autocmd VimEnter * if argc() == 0 | Startify | endif
+augroup END
+
+" fzf if passed argument is a folder
+augroup folderarg
+    " change working directory to passed directory
+    autocmd VimEnter * if argc() != 0 && isdirectory(argv()[0]) | execute 'cd' fnameescape(argv()[0])  | endif
+
+    " start startify (fallback if fzf is closed)
+    autocmd VimEnter * if argc() != 0 && isdirectory(argv()[0]) | Startify  | endif
+
+    " start fzf on passed directory
+    autocmd VimEnter * if argc() != 0 && isdirectory(argv()[0]) | execute 'Files ' fnameescape(argv()[0]) | endif
 augroup END
 
 " Return to last edit position when opening files
@@ -431,8 +444,8 @@ nmap <leader>ji <Plug>(coc-implementation)
 nmap <leader>jr <Plug>(coc-references)
 
 " other coc actions
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <leader>a :CocCommand actions.open<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " fugitive mappings
