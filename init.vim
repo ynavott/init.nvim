@@ -41,6 +41,7 @@ Plug 'tpope/vim-eunuch'                                 " run common Unix comman
 Plug 'machakann/vim-sandwich'                           " make sandwiches
 "Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'lambdalisue/suda.vim'                             " add sudo functionality
 call plug#end()
 
 "}}}
@@ -240,6 +241,9 @@ let g:tmux_navigator_no_mappings = 1
 
 " semshi settings
 let g:semshi#error_sign	= v:false                       " let ms python lsp handle this
+
+" suda smart edit
+let g:suda_smart_edit = 1
 
 "" FZF
 let g:fzf_action = {
