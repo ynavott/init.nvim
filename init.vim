@@ -247,6 +247,22 @@ let g:fzf_action = {
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 let g:fzf_tags_command = 'ctags -R'
 
+" fzf nord color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'String'],
+  \ 'fg+':     ['fg', 'Normal', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'NonText', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'String'],
+  \ 'info':    ['fg', 'LineNr'],
+  \ 'border':  ['fg', 'Comment'],
+  \ 'prompt':  ['fg', 'Boolean'],
+  \ 'pointer': ['fg', 'SpellBad'],
+  \ 'marker':  ['fg', 'SpellCap'],
+  \ 'spinner': ['fg', 'LineNr'],
+  \ 'header':  ['fg', 'LineNr'] }
+
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**'"
 
