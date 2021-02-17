@@ -1,5 +1,6 @@
 <p align="center">
 <img src="./Screens/screen0.png">
+
 </p>
 
 ## Table of Contents
@@ -49,6 +50,9 @@ Neovim provides support for a wide range of languages by default.
 There is also support for:
 
 - [liquid](https://shopify.github.io/liquid/)
+- [dart](http://dart.dev)
+- [Flutter](https://flutter.dev/)
+- [solidity](https://solidity.readthedocs.io/en/v0.7.4/)
 
 ## Requirements
 
@@ -99,7 +103,6 @@ Coc extensions are lazy loaded as well, they work the same way as vim-plug plugi
 | [vim-material](https://github.com/hzchirs/vim-material)             | material themes                              |
 | [coc.nvim](https://github.com/neoclide/coc.nvim)                    | async completion and more                    |
 | [fzf.vim](https://github.com/junegunn/fzf.vim)                      | fuzzy finder vim integration                 |
-| [ultisnips](https://github.com/SirVer/ultisnips)                    | snippets engine                              |
 | [vim-snippets](https://github.com/honza/vim-snippets)               | snippets for many languages                  |
 | [indentLine](https://github.com/Yggdroot/indentLine)                | auto indent lines                            |
 | [vim-liquid](https://github.com/tpope/vim-liquid)                   | liquid language support                      |
@@ -113,6 +116,7 @@ Coc extensions are lazy loaded as well, they work the same way as vim-plug plugi
 | [vim-eunuch](https://github.com/tpope/vim-eunuch)                   | some common Linux commands                   |
 | [semshi](https://github.com/numirias/semshi)                        | better highlighting for python               |
 | [markdown-preview](https://github.com/iamcco/markdown-preview.nvim) | live markdown preview                        |
+| [vim-MvVis](https://github.com/Jorengarenar/vim-MvVis)              | move visual selection                        |
 
 ## Keyboard shortcuts
 
@@ -128,10 +132,21 @@ To learn the default Vim shortcuts run `Tutor` and or checkout this [vim adventu
 | `leader + w` | save changes                         |
 | `leader + e` | call :PlugInstall (install plug-ins) |
 | `Enter`      | enter empty line in normal mode      |
-| `F5`         | trim white spaces                    |
+| `F2`         | trim white spaces                    |
 | `F6`         | open Startify                        |
 
+#### Visual Mode Essentials
+
+| Mapping    | functionality                   |
+| ---------- | ------------------------------- |
+| `ctrl + j` | move selected text to bottom    |
+| `ctrl + k` | move selected text to top       |
+| `ctrl + h` | move selected text to the left  |
+| `ctrl + l` | move selected text to the right |
+
 #### Navigation
+
+`ctrl + hjkl` navigation also supports tmux panes.
 
 | Mapping      | functionality                          |
 | ------------ | -------------------------------------- |
@@ -149,7 +164,7 @@ To learn the default Vim shortcuts run `Tutor` and or checkout this [vim adventu
 | Mapping       | functionality                        |
 | ------------- | ------------------------------------ |
 | `leader + o`  | organize imports                     |
-| `leader + a`  | run cocAction                        |
+| `leader + a`  | run cocAction on what's undercursor  |
 | `leader + s`  | format file with available formatter |
 | `leader + rn` | rename globally                      |
 | `leader + jd` | jump to definition                   |
@@ -160,6 +175,14 @@ To learn the default Vim shortcuts run `Tutor` and or checkout this [vim adventu
 | `shift + k`   | show current symbol documentation    |
 | `]g`          | next diagnostic                      |
 | `[g`          | Previous diagnostic                  |
+
+#### Flutter
+
+| Mapping | functionality                          |
+| ------- | -------------------------------------- |
+| `F3`    | show list of devices                   |
+| `F4`    | show list of emulators                 |
+| `F5`    | start development server (flutter run) |
 
 #### FZF windows
 

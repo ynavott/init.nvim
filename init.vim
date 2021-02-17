@@ -19,7 +19,7 @@ Plug 'luochen1990/rainbow'                              " rainbow parenthesis
 "Plug 'hzchirs/vim-material'                             " material color themes
 Plug 'arcticicestudio/nord-vim'                         " nord color scheme
 Plug 'gregsexton/MatchTag'                              " highlight matching html tags
-
+Plug 'Jorengarenar/vim-MvVis'                           " move visual selection
 "}}}
 
 " ================= Functionalities ================= "{{{
@@ -27,7 +27,6 @@ Plug 'gregsexton/MatchTag'                              " highlight matching htm
 Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }     " fzf itself
 Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
-"Plug 'SirVer/ultisnips'                                 " snippets manager
 Plug 'honza/vim-snippets'                               " actual snippets
 Plug 'Yggdroot/indentLine'                              " show indentation lines
 Plug 'tpope/vim-liquid'                                 " liquid language support
@@ -36,12 +35,14 @@ Plug 'tpope/vim-commentary'                             " better commenting
 Plug 'mhinz/vim-startify'                               " cool start up screen
 Plug 'tpope/vim-fugitive'                               " git support
 Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
-Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
+"Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
 Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
+"Plug 'dart-lang/dart-vim-plugin'
 Plug 'machakann/vim-sandwich'                           " make sandwiches
 "Plug 'christoomey/vim-tmux-navigator'                   " seamless vim and tmux navigation
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'lambdalisue/suda.vim'                             " add sudo functionality
+"Plug 'TovarishFin/vim-solidity'
 call plug#end()
 
 "}}}
@@ -96,8 +97,8 @@ set shortmess+=c
 set signcolumn=yes
 
 " Python VirtualEnv
-"let g:python_host_prog =  expand('/home/yoav/.virtualenvs/pynvim3/.venv/bin/python')
-let g:python3_host_prog = expand('/home/yoav/.virtualenvs/pynvim3/.venv/bin/python')
+let g:python_host_prog =  expand('/home/yoav/.virtualenvs/python/pynvim2/.venv/bin/python')
+let g:python3_host_prog = expand('/home/yoav/.virtualenvs/python/pynvim3/.venv/bin/python')
 
 " Themeing
 "let g:material_style = 'oceanic'
@@ -157,7 +158,6 @@ let g:coc_snippet_prev = '<S-Tab>'
 " list of the extensions to make sure are always installed
 let g:coc_global_extensions = [
             \'coc-yank',
-            \'coc-actions',
             \'coc-pairs',
             \'coc-json',
             \'coc-css',
@@ -166,7 +166,7 @@ let g:coc_global_extensions = [
             \'coc-yaml',
             \'coc-lists',
             \'coc-snippets',
-            \'coc-python',
+            \'coc-pyright',
             \'coc-clangd',
             \'coc-prettier',
             \'coc-xml',
@@ -175,10 +175,11 @@ let g:coc_global_extensions = [
             \'coc-marketplace',
             \'coc-highlight',
             \]
+" if i want flutter add above:  \'coc-flutter',
 
 " indentLine
 let g:indentLine_enabled = 0
-let g:indentLine_char_list = ['▏']
+let g:indentLine_char_list = ['▏', '¦', '┆', '┊']
 let g:indentLine_setColors = 0
 let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
 let g:indentLine_fileTypeExclude = ['startify']
@@ -264,7 +265,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'LineNr'] }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**'"
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
 "}}}
 
@@ -278,6 +279,7 @@ au CursorHold * silent call CocActionAsync('highlight') " highlight match on cur
 " enable spell only if file type is normal text
 let spellable = ['markdown', 'gitcommit', 'txt', 'text', 'liquid', 'rst']
 autocmd BufEnter * if index(spellable, &ft) < 0 | set nospell | else | set spell | endif
+
 
 " coc completion popup
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -405,7 +407,10 @@ nnoremap <C-l> <C-w>l
 noremap <silent><esc> <esc>:noh<CR><esc>
 
 " trim white spaces
-nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" markdown preview
+au FileType markdown nmap <leader>m :MarkdownPreview<CR>
 
 "" FZF
 nnoremap <silent> <leader>f :Files<CR>
@@ -453,9 +458,14 @@ nmap <leader>ji <Plug>(coc-implementation)
 nmap <leader>jr <Plug>(coc-references)
 
 " other coc actions
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <leader>a :CocCommand actions.open<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <leader>a <Plug>(coc-codeaction-line)
+xmap <leader>a <Plug>(coc-codeaction-selected)
+
+" flutter mappings
+"nnoremap <F3> :CocCommand flutter.devices<CR>
+"nnoremap <F4> :CocCommand flutter.emulators<CR>
+"nnoremap <F5> :CocCommand flutter.run<CR>
 
 " fugitive mappings
 nmap <leader>gd :Gdiffsplit<CR>
@@ -486,5 +496,11 @@ nnoremap <c-n> :call OpenTerminal()<CR>
           \   call nvim_input('<CR>')  |
           \ endif
   augroup END
+
+" tmux navigator
+"nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+"nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+"nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+"nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 
 "}}}
