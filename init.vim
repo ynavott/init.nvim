@@ -383,10 +383,10 @@ map <Enter> o<ESC>
 map <S-Enter> O<ESC>
 
 " use a different register for delete and paste
-nnoremap d "_d
-vnoremap d "_d
+nnoremap d "dd
+vnoremap d "dd
 vnoremap p "_dP
-nnoremap x "_x
+nnoremap x "xx
 
 " emulate windows copy, cut behavior
 vnoremap <LeftRelease> "+y<LeftRelease>
